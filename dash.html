@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard BI</title>
+
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+
+  
+      /* background-image: url("imagem/Navbar.png"); */
+      background: #363A40;
+    }
+    
+    .topbar{
+  width: 100%;
+  height: 70px;
+  /* background-image: url("imagem/Navbar.png"); */
+  background: #363A40;
+  color: white;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 0 30px;
+
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.btn-logout{
+  /* background: white;
+  color: #06275e; */
+
+  border: none;
+
+  padding: 10px 20px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.btn-logout:hover{
+  background: #ffff;
+}
+
+    .dashboard-container{
+  padding: 0;
+}
+
+    iframe{
+  width: 100%;
+  height: 90vh;
+
+  border: none;
+  margin: 0;
+  display: block;
+
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/*.menu-btn{
+  background: white;
+  color: #06275e;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 20px;
+}*/
+
+.sidebar{
+  width: 250px;
+  height: calc(100vh - 70px);
+
+  background: #363A40;
+
+  position: fixed;
+
+  top: 70px;
+  left: -250px;
+
+  transition: 0.3s;
+
+  padding: 20px;
+
+  z-index: 1000;
+}
+
+.sidebar.active{
+  left: 0;
+}
+
+.sidebar h2{
+  color: white;
+  margin-bottom: 20px;
+}
+
+.sidebar button{
+
+  width: 100%;
+
+  margin-bottom: 15px;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #32415d;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  transition: 0.3s;
+}
+
+.sidebar button:hover{
+  background: #32415d;
+}
+
+.dashboard-container{
+  padding: 20px;
+
+  transition: 0.3s;
+}
+
+.dashboard-container.shift{
+  margin-left: 250px;
+}
+  </style>
+
+</head>
+
+<body>
+  
+  <header class="topbar">
+
+    <!-- <button class="menu-btn" onclick="toggleMenu()">
+      ☰
+    </button>
+
+    <div>
+      ONET BRASIL
+    </div> -->
+
+    <button class="btn-logout" onclick="logout()">
+      Sair
+    </button>
+
+  </header>
+
+  <!-- MENU LATERAL -->
+
+  <!-- <aside class="sidebar" id="sidebar">
+
+    <h2>Relatórios</h2>
+
+    <button onclick="trocarPagina('d8b37a8a9e6ba57cb96f')">
+      Todos
+    </button>
+
+    <button onclick="trocarPagina('d9deee2c4c4db4bc1c38')">
+      Todos no Tempo
+    </button>
+
+    <button onclick="trocarPagina('b1caced62dcd2db6d7c7')">
+      Gestão Backlog
+    </button> -->
+
+    <!-- <button onclick="trocarPagina('ReportSection4')">
+      Operacional
+    </button> -->
+<!-- 
+  </aside> -->
+
+  <!-- CONTEÚDO -->
+
+  <main class="dashboard-container" id="dashboard-container">
+
+    <iframe
+      id="powerbi-frame"
+      src="https://app.powerbi.com/reportEmbed?reportId=e8f84daf-97f4-40ef-b165-a5f8a78b9fd0&autoAuth=true&ctid=56670a1c-98e6-4338-b03d-b0ab8219704e">
+    </iframe>
+
+  </main>
+
+  <script>
+
+  function logout(){
+
+  sessionStorage.removeItem("logado");
+
+  window.location.href = "index.html";
+
+}
+
+  // function toggleMenu(){
+
+  //   const sidebar = document.getElementById("sidebar");
+
+  //   const dashboard =
+  //   document.getElementById("dashboard-container");
+
+  //   sidebar.classList.toggle("active");
+
+  //   dashboard.classList.toggle("shift");
+
+  // }
+
+  function trocarPagina(pageId){
+
+  const iframe =
+  document.getElementById("powerbi-frame");
+
+  iframe.src =
+  "https://app.powerbi.com/reportEmbed?reportId=386a77e1-f887-4c2f-a2db-d62c65e2b052" +
+  "&autoAuth=true" +
+  "&ctid=56670a1c-98e6-4338-b03d-b0ab8219704e" +
+  "&navContentPaneEnabled=false" +
+  "&filterPaneEnabled=false" +
+  "&pageNavigationPosition=hidden" +
+  "&pageName=" + pageId;
+
+}
+
+  // FECHAR MENU AO CLICAR FORA
+
+  // document.addEventListener("click", function(event){
+
+  //   const sidebar =
+  //   document.getElementById("sidebar");
+
+  //   const menuBtn =
+  //   document.querySelector(".menu-btn");
+
+  //   const dashboard =
+  //   document.getElementById("dashboard-container");
+
+  //   const clicouDentroSidebar =
+  //   sidebar.contains(event.target);
+
+  //   const clicouNoBotao =
+  //   menuBtn.contains(event.target);
+
+  //   if(
+  //     sidebar.classList.contains("active") &&
+  //     !clicouDentroSidebar &&
+  //     !clicouNoBotao
+  //   ){
+
+  //     sidebar.classList.remove("active");
+
+  //     dashboard.classList.remove("shift");
+
+  //   }
+
+  // });
+
+</script>
+</body>
+</html>
