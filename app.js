@@ -9,7 +9,7 @@ form.addEventListener("submit", async function(event){
 
     try{
 
-        const resposta = await fetch("http://localhost:3000/login", {
+        const resposta = await fetch("https://onetbi.onrender.com/login", {
 
             method: "POST",
 
