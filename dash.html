@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <title>Dashboard BI</title>
 
@@ -18,57 +20,25 @@
     body{
 
   
-      /* background-image: url("imagem/Navbar.png"); */
       background: #363A40;
+    
     }
     
-    .topbar{
-  width: 100%;
-  height: 70px;
-  /* background-image: url("imagem/Navbar.png"); */
-  background: #363A40;
-  color: white;
 
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.logo-menu{
+  width: 300px;
 
-  padding: 0 30px;
-
-  font-size: 24px;
-  font-weight: bold;
+  margin-left: -65px; /* ajusta para a esquerda */
+  margin-bottom: 30px;
 }
-
-.btn-logout{
-  background: white;
-  color: #4a4f55;
-
-  border: none;
-
-  padding: 10px 20px;
-
-  border-radius: 8px;
-
-  cursor: pointer;
-
-  font-size: 16px;
-  font-weight: bold;
-
-  transition: 0.3s;
-}
-
-.btn-logout:hover{
-  background: #4a4f55;
-  color: white;
-}
-
     .dashboard-container{
+  margin-left: 220px;
   padding: 0;
 }
 
     iframe{
   width: 100%;
-  height: 90vh;
+  height: 95vh;
 
   border: none;
   margin: 0;
@@ -78,31 +48,17 @@
   box-shadow: none;
 }
 
-/*.menu-btn{
-  background: white;
-  color: #06275e;
-
-  border: none;
-
-  padding: 10px 15px;
-
-  border-radius: 8px;
-
-  cursor: pointer;
-
-  font-size: 20px;
-}*/
-
 .sidebar{
-  width: 250px;
-  height: calc(100vh - 70px);
+  width: 220px;
+  height: 100vh;
 
-  background: #363A40;
+  background: #272a2e;
 
   position: fixed;
-
-  top: 70px;
-  left: -250px;
+  display: flex;
+  flex-direction: column;
+  top: 0px;
+  left: 0px; 
 
   transition: 0.3s;
 
@@ -111,42 +67,52 @@
   z-index: 1000;
 }
 
-.sidebar.active{
-  left: 0;
-}
-
 .sidebar h2{
   color: white;
   margin-bottom: 20px;
 }
 
 .sidebar button{
+  display: flex;
+  align-items: center;
+  gap: 25px; 
 
   width: 100%;
-
-  margin-bottom: 15px;
-
-  padding: 15px;
-
-  border: none;
-
-  border-radius: 10px;
-
-  background: #32415d;
-
+  background: transparent;
   color: white;
-
+  border: none;
+  padding: 14px;
   cursor: pointer;
+  text-align: left;
 
-  font-size: 16px;
-
-  transition: 0.3s;
+  font-size: 18px;  
+  font-weight: 300;
 }
 
 .sidebar button:hover{
   background: #32415d;
 }
 
+.sidebar button.active{
+  background: #32415d;
+}
+
+.menu-footer{
+  margin-top: auto;
+  margin-bottom: 60px;
+}
+
+.btn-sair{
+  border: 1px solid #5a6778 !important;
+  border-radius: 10px !important;
+
+  background: transparent !important;
+
+  color: white !important;
+}
+.btn-sair:hover{
+  background: #090849 !important;
+}
 .dashboard-container{
   padding: 20px;
 
@@ -162,55 +128,52 @@
 
 <body>
   
-  <header class="topbar">
+    <aside class="sidebar">
 
-    <!-- <button class="menu-btn" onclick="toggleMenu()">
-      ☰
+    <img src="imagem/logobi.png" class="logo-menu">
+
+   <button onclick="trocarPagina('GestaoBacklog')">
+    <i class="fa-solid fa-chart-line"></i>
+    Dashboard
+  </button>
+
+    <button onclick="trocarPagina('CCR')">
+      <i class="fa-solid fa-file-lines"></i>
+      CCR
     </button>
 
-    <div>
-      ONET BRASIL
-    </div> -->
-
-    <button class="btn-logout" onclick="logout()">
-      Sair
+    <button onclick="trocarPagina('ICR')">
+      <i class="fa-solid fa-file-invoice"></i>
+      ICR
     </button>
 
-  </header>
-
-  <!-- MENU LATERAL -->
-
-  <!-- <aside class="sidebar" id="sidebar">
-
-    <h2>Relatórios</h2>
-
-    <button onclick="trocarPagina('d8b37a8a9e6ba57cb96f')">
-      Todos
+    <button onclick="trocarPagina('IMREA')">
+      <i class="fa-solid fa-chart-pie"></i> 
+      IMREA
     </button>
 
-    <button onclick="trocarPagina('d9deee2c4c4db4bc1c38')">
-      Todos no Tempo
+    <button onclick="trocarPagina('Comentarios')">
+      <i class="fa-solid fa-comments"></i>
+      Comentários
     </button>
 
-    <button onclick="trocarPagina('b1caced62dcd2db6d7c7')">
-      Gestão Backlog
-    </button> -->
 
-    <!-- <button onclick="trocarPagina('ReportSection4')">
-      Operacional
-    </button> -->
-<!-- 
-  </aside> -->
+<div class="menu-footer">
 
-  <!-- CONTEÚDO -->
+  <button class="btn-sair" onclick="logout()">
+    <i class="fa-solid fa-sign-out-alt"></i>
+    Sair
+  </button>
+
+</div>
+  </aside>
 
   <main class="dashboard-container" id="dashboard-container">
 
     <iframe
       id="powerbi-frame"
-      src="https://app.powerbi.com/reportEmbed?reportId=e8f84daf-97f4-40ef-b165-a5f8a78b9fd0&autoAuth=true&ctid=56670a1c-98e6-4338-b03d-b0ab8219704e">
+      src="https://app.powerbi.com/reportEmbed?reportId=e8f84daf-97f4-40ef-b165-a5f8a78b9fd0&autoAuth=true&ctid=56670a1c-98e6-4338-b03d-b0ab8219704e&navContentPaneEnabled=false&filterPaneEnabled=false&pageNavigationPosition=hidden">
     </iframe>
-
   </main>
 
   <script>
@@ -222,19 +185,6 @@
   window.location.href = "index.html";
 
 }
-
-  // function toggleMenu(){
-
-  //   const sidebar = document.getElementById("sidebar");
-
-  //   const dashboard =
-  //   document.getElementById("dashboard-container");
-
-  //   sidebar.classList.toggle("active");
-
-  //   dashboard.classList.toggle("shift");
-
-  // }
 
   function trocarPagina(pageId){
 
@@ -252,38 +202,6 @@
 
 }
 
-  // FECHAR MENU AO CLICAR FORA
-
-  // document.addEventListener("click", function(event){
-
-  //   const sidebar =
-  //   document.getElementById("sidebar");
-
-  //   const menuBtn =
-  //   document.querySelector(".menu-btn");
-
-  //   const dashboard =
-  //   document.getElementById("dashboard-container");
-
-  //   const clicouDentroSidebar =
-  //   sidebar.contains(event.target);
-
-  //   const clicouNoBotao =
-  //   menuBtn.contains(event.target);
-
-  //   if(
-  //     sidebar.classList.contains("active") &&
-  //     !clicouDentroSidebar &&
-  //     !clicouNoBotao
-  //   ){
-
-  //     sidebar.classList.remove("active");
-
-  //     dashboard.classList.remove("shift");
-
-  //   }
-
-  // });
 
 </script>
 </body>
