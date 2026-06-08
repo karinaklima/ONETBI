@@ -146,12 +146,80 @@
 .dashboard-container.shift{
   margin-left: 250px;
 }
+
+.menu-mobile{
+  display: none;
+}
+#aviso-rotacao{
+  display: none;
+}
+
+@media(max-width: 900px){
+
+  #aviso-rotacao{
+    display: block;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    background: #06275e;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 10px;
+
+    z-index: 9999;
+
+    font-size: 14px;
+  }
+
+  iframe{
+    margin-top: 45px;
+  }
+
+}
+@media (max-width: 900px) and (orientation: portrait){
+
+  #aviso-rotacao{
+    display: block;
+  }
+
+}
+@media(max-width: 900px){
+
+  .sidebar{
+    width: 220px;
+  }
+
+  .logo-menu{
+    width: 220px;
+    margin-left: -45px;
+  }
+
+  .sidebar button{
+    font-size: 14px;
+    gap: 15px;
+  }
+
+  .dashboard-container{
+    margin-left: 220px;
+  }
+
+}
   </style>
 
 </head>
 
 <body>
-  
+  <div id="aviso-rotacao">
+  🔄 Para melhor visualização do relatório, gire o celular para o modo horizontal.
+  </div>
     <aside class="sidebar">
 
     <img src="imagem/logobi.png" class="logo-menu">
@@ -244,31 +312,7 @@
   "&pageNavigationPosition=hidden" +
   "&pageName=" + pageId;
 
-} // ← FECHA AQUI
-
-function toggleRelatorios() {
-
-  const menu =
-  document.getElementById("submenu-relatorios");
-
-  if(menu.style.display === "block"){
-    menu.style.display = "none";
-  }else{
-    menu.style.display = "block";
-  }
-}
-
-function toggleHistoricos() {
-
-  const menu =
-  document.getElementById("submenu-historicos");
-
-  if(menu.style.display === "block"){
-    menu.style.display = "none";
-  }else{
-    menu.style.display = "block";
-  }
-}
+} 
 
 </script>
 </body>

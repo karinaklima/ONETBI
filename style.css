@@ -167,17 +167,12 @@ footer{
 
 @media(max-width: 900px){
 
-  body{
-    flex-direction: column;
-  }
-
   .left-side{
-    width: 100%;
-    height: 250px;
+    display: none;
   }
 
   .right-side{
     width: 100%;
+    min-height: 100vh;
   }
-
 }
