@@ -29,9 +29,9 @@
   width: 300px;
 
   margin-left: -65px; /* ajusta para a esquerda */
-  margin-bottom: 30px;
+  margin-bottom: 40px; 
 }
-    .dashboard-container{
+  .dashboard-container{
   margin-left: 220px;
   padding: 0;
 }
@@ -49,7 +49,7 @@
 }
 
 .sidebar{
-  width: 220px;
+  width: 260px;
   height: 100vh;
 
   background: #272a2e;
@@ -61,7 +61,7 @@
   left: 0px; 
 
   transition: 0.3s;
-
+  overflow-y: auto; /* ativa rolagem vertical */
   padding: 20px;
 
   z-index: 1000;
@@ -69,7 +69,7 @@
 
 .sidebar h2{
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .sidebar button{
@@ -81,12 +81,17 @@
   background: transparent;
   color: white;
   border: none;
-  padding: 14px;
+  padding: 10px;
   cursor: pointer;
   text-align: left;
 
-  font-size: 18px;  
-  font-weight: 300;
+  font-size: 16px;  
+  font-weight: 250;
+}
+
+.sidebar button i{
+  width: 20px;
+  text-align: center;
 }
 
 .sidebar button:hover{
@@ -99,19 +104,38 @@
 
 .menu-footer{
   margin-top: auto;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .btn-sair{
   border: 1px solid #5a6778 !important;
   border-radius: 10px !important;
-
+  margin-top: 15px;
   background: transparent !important;
 
   color: white !important;
 }
 .btn-sair:hover{
   background: #090849 !important;
+}
+.sidebar::-webkit-scrollbar{
+  width: 6px;
+  background: #272a2e;
+  border-radius: 10px;
+}
+.menu-itens{
+  flex: 1;
+  overflow-y: auto;
+}
+
+.submenu{
+  display: none;
+  margin-left: 20px;
+}
+
+.submenu button{
+  font-size: 14px;
+  padding: 8px 15px;
 }
 .dashboard-container{
   padding: 20px;
@@ -132,35 +156,55 @@
 
     <img src="imagem/logobi.png" class="logo-menu">
 
-   <button onclick="trocarPagina('Gestao Backlog')">
-    <i class="fa-solid fa-chart-line"></i>
-    Gestão Backlog
+  <button onclick="trocarPagina('b1caced62dcd2db6d7c7')">
+    <i class="fa-solid fa-chart-pie"></i>
+    Gestão do Backlog
   </button>
 
-    <button onclick="trocarPagina('Todos')">
-      <i class="fa-solid fa-file-lines"></i>
-      Relatório Geral
-    </button>
+  <button onclick="toggleRelatorios()">
+    <i class="fa-solid fa-chart-line"></i>
+    Relatórios ⌵
+  </button>
 
-    <button onclick="trocarPagina('Todos no Tempo')">
-      <i class="fa-solid fa-file-invoice"></i>
-      Histórico Geral
-    </button>
+  <div id="submenu-relatorios" class="submenu">
 
-    <button onclick="trocarPagina('IMREA')">
-      <i class="fa-solid fa-chart-pie"></i> 
-      IMREA
-    </button>
+    <button onclick="trocarPagina('d8b37a8a9e6ba57cb96f')">• Geral</button>
+    <button onclick="trocarPagina('8e72aae79da4206bedd0')">• CCR</button>
+    <button onclick="trocarPagina('dcc088d7e1d1db70436b')">• ICHC</button>
+    <button onclick="trocarPagina('dddb1fcad6d0901bc030')">• ICR</button>
+    <button onclick="trocarPagina('99e97b21c300166b5961')">• IGS</button>
+    <button onclick="trocarPagina('fd6287f3bc697c893538')">• IMREA</button>
+    <button onclick="trocarPagina('d75922f5b12000ab72d0')">• INCOR</button>
+    <button onclick="trocarPagina('88e01398a971339810e0')">• INRAD</button>
+    <button onclick="trocarPagina('dc7f68004948d6a1c2c2')">• IOT</button>
+    <button onclick="trocarPagina('32fed97516852e4d0088')">• IPQ</button>
 
-    <button onclick="trocarPagina('Comentarios')">
-      <i class="fa-solid fa-comments"></i>
-      Comentários
-    </button>
+  </div>
 
+  <button onclick="toggleHistoricos()">
+    <i class="fa-solid fa-file-invoice"></i>
+    Históricos ⌵
+  </button>
 
+  <div id="submenu-historicos" class="submenu">
+
+    <button onclick="trocarPagina('d9deee2c4c4db4bc1c38')">• Geral</button>
+    <button onclick="trocarPagina('db31024036c339c50e18')">• CCR</button>
+    <button onclick="trocarPagina('ce5349b947d136e4b105')">• ICHC</button>
+    <button onclick="trocarPagina('5ed29074533148c1e574')">• ICR</button>
+    <button onclick="trocarPagina('12aa33c489098722899c')">• IGS</button>
+    <button onclick="trocarPagina('146c6701eed6e8956009')">• IMREA</button>
+    <button onclick="trocarPagina('d29a7892b40299187002')">• INCOR</button>
+    <button onclick="trocarPagina('f0cebca55b2b294bb014')">• INRAD</button>
+    <button onclick="trocarPagina('a5a9448cd4a08ad57b0a')">• IOT</button>
+    <button onclick="trocarPagina('e767b2c0352be7760a1e')">• IPQ</button>
+
+  </div>
+
+   
 <div class="menu-footer">
 
-  <button class="btn-sair" onclick="logout()">
+   <button class="btn-sair" onclick="logout()">
     <i class="fa-solid fa-sign-out-alt"></i>
     Sair
   </button>
@@ -192,7 +236,7 @@
   document.getElementById("powerbi-frame");
 
   iframe.src =
-  "https://app.powerbi.com/reportEmbed?reportId=386a77e1-f887-4c2f-a2db-d62c65e2b052" +
+  "https://app.powerbi.com/reportEmbed?reportId=e8f84daf-97f4-40ef-b165-a5f8a78b9fd0" +
   "&autoAuth=true" +
   "&ctid=56670a1c-98e6-4338-b03d-b0ab8219704e" +
   "&navContentPaneEnabled=false" +
@@ -200,8 +244,31 @@
   "&pageNavigationPosition=hidden" +
   "&pageName=" + pageId;
 
+} // ← FECHA AQUI
+
+function toggleRelatorios() {
+
+  const menu =
+  document.getElementById("submenu-relatorios");
+
+  if(menu.style.display === "block"){
+    menu.style.display = "none";
+  }else{
+    menu.style.display = "block";
+  }
 }
 
+function toggleHistoricos() {
+
+  const menu =
+  document.getElementById("submenu-historicos");
+
+  if(menu.style.display === "block"){
+    menu.style.display = "none";
+  }else{
+    menu.style.display = "block";
+  }
+}
 
 </script>
 </body>
