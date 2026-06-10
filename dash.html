@@ -365,6 +365,15 @@ function toggleHistoricos() {
     menu.style.display = "block";
   }
 
+  setInterval(() => {
+
+  const iframe =
+  document.getElementById("powerbi-frame");
+
+  iframe.src = iframe.src;
+
+}, 25 * 60 * 1000);
+
 }
 </script>
 </body>
